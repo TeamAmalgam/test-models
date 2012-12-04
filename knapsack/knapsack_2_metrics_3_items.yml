@@ -1,0 +1,21 @@
+problem:
+  max_weight: 10
+  metrics:
+    - maximize
+    - maximize
+  items:
+    -
+      weight: 2
+      metrics:
+        - 2
+        - 1
+    -
+      weight: 4
+      metrics:
+        - 4
+        - 3
+    -
+      weight: 8
+      metrics:
+        - 9
+        - 0
