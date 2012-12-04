@@ -1,11 +1,27 @@
 #!/usr/bin/env ruby
 
-require 'yaml'
 require 'erb'
-# Read in the problem description from the given file
-description_filename = ARGV[0]
-description = YAML.load_file(description_filename)
 
+n, m = ARGV[0..1].collect{|a| a.to_i} # n is number of items, m is number of profit functions
+
+description = { "problem" => {
+                  "max_weight" => 100,
+                  "metrics" => [],
+                  "items" => []}}
+m.times do
+  description["problem"]["metrics"] << "maximize"
+end
+
+n.times do
+  item = { "weight" => rand(11),
+           "metrics" => []}
+  m.times do
+    item["metrics"] << rand(11) 
+  end
+  description["problem"]["items"] << item
+end
+
+# Read in the problem description from the given file
 metrics = description["problem"]["metrics"]
 metricIds = (0..(metrics.count - 1)).to_a.collect{|a| "metric#{a}"}
 
@@ -84,4 +100,6 @@ template = ERB.new <<-HERE
   run show for KnapsackProblem optimize o_global
 HERE
 
-puts template.result(binding)
+File.open("knapsack_#{n}_metrics_#{m}.als", 'w') do |f|
+  f.puts template.result(binding)
+end

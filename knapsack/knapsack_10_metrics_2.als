@@ -37,40 +37,103 @@
   // Define concrete items
   
     one sig Item0 extends Item {} {
-      weight = 2
+      weight = 3
       
-        metric0 = 2 
+        metric0 = 4 
       
-        metric1 = 1 
+        metric1 = 6 
       
     }
   
     one sig Item1 extends Item {} {
-      weight = 4
+      weight = 0
       
-        metric0 = 4 
+        metric0 = 2 
       
-        metric1 = 3 
+        metric1 = 2 
       
     }
   
     one sig Item2 extends Item {} {
-      weight = 8
+      weight = 1
       
         metric0 = 9 
       
-        metric1 = 0 
+        metric1 = 6 
+      
+    }
+  
+    one sig Item3 extends Item {} {
+      weight = 0
+      
+        metric0 = 2 
+      
+        metric1 = 8 
+      
+    }
+  
+    one sig Item4 extends Item {} {
+      weight = 5
+      
+        metric0 = 9 
+      
+        metric1 = 5 
+      
+    }
+  
+    one sig Item5 extends Item {} {
+      weight = 7
+      
+        metric0 = 7 
+      
+        metric1 = 10 
+      
+    }
+  
+    one sig Item6 extends Item {} {
+      weight = 2
+      
+        metric0 = 1 
+      
+        metric1 = 8 
+      
+    }
+  
+    one sig Item7 extends Item {} {
+      weight = 7
+      
+        metric0 = 10 
+      
+        metric1 = 7 
+      
+    }
+  
+    one sig Item8 extends Item {} {
+      weight = 0
+      
+        metric0 = 9 
+      
+        metric1 = 5 
+      
+    }
+  
+    one sig Item9 extends Item {} {
+      weight = 3
+      
+        metric0 = 7 
+      
+        metric1 = 2 
       
     }
   
 
   // Define concrete knapsack
   one sig ConcreteKnapsack extends Knapsack {} {
-    max_weight = 10
+    max_weight = 100
   }
 
   inst KnapsackProblem {
-    5 Int
+    8 Int
   }
 
   objectives o_global {
