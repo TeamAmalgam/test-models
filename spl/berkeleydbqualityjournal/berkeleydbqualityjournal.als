@@ -115,9 +115,7 @@ pred featureSet
   HAVE_BTREE in BerkeleyDbC.features
 
   // Must have exactly one of BTREE_FAST or BTREE_SMALL
-  (BTREE_FAST in BerkeleyDbC.features) or (BTREE_SMALL in BerkeleyDbC.features)
-  (BTREE_FAST in BerkeleyDbC.features) => (BTREE_SMALL not in BerkeleyDbC.features)
-  (BTREE_SMALL in BerkeleyDbC.features) => (BTREE_FAST not in BerkeleyDbC.features)
+  one ((BTREE_FAST + BTREE_SMALL) & BerkeleyDbC.features)
 
   // Define the constraints here:
   // No other constraints

@@ -83,22 +83,15 @@ pred featureSet
   Base in LinkedList.features
 
   // Must have exactly one of ElementA, ElementB, or ElementC
-  (ElementA in LinkedList.features) or (ElementB in LinkedList.features) or (ElementC in LinkedList.features)
-  (ElementA in LinkedList.features) => ((ElementB not in LinkedList.features) and (ElementC not in LinkedList.features))
-  (ElementB in LinkedList.features) => ((ElementA not in LinkedList.features) and (ElementC not in LinkedList.features))
-  (ElementC in LinkedList.features) => ((ElementA not in LinkedList.features) and (ElementB not in LinkedList.features))
+  one ((ElementA + ElementB + ElementC) & LinkedList.features)
 
   // Must have exactly one of ForwardIterator or BackwardIterator
-  (ForwardIterator in LinkedList.features) or (BackwardIterator in LinkedList.features)
-  (ForwardIterator in LinkedList.features) => (BackwardIterator not in LinkedList.features)
-  (BackwardIterator in LinkedList.features) => (ForwardIterator not in LinkedList.features)
+  one ((ForwardIterator + BackwardIterator) & LinkedList.features)
 
   // If we choose AbstractSort, then we must have exactly one of BubbleSort, MergeSort, InsertionSort, or QuickSort
-  (AbstractSort in LinkedList.features) => ((BubbleSort in LinkedList.features) or (MergeSort in LinkedList.features) or (InsertionSort in LinkedList.features) or (QuickSort in LinkedList.features))
-  (BubbleSort in LinkedList.features) => ((AbstractSort in LinkedList.features) and (MergeSort not in LinkedList.features) and (InsertionSort not in LinkedList.features) and (QuickSort not in LinkedList.features))
-  (MergeSort in LinkedList.features) => ((AbstractSort in LinkedList.features) and (BubbleSort not in LinkedList.features) and (InsertionSort not in LinkedList.features) and (QuickSort not in LinkedList.features))
-  (InsertionSort in LinkedList.features) => ((AbstractSort in LinkedList.features) and (BubbleSort not in LinkedList.features) and (MergeSort not in LinkedList.features) and (QuickSort not in LinkedList.features))
-  (QuickSort in LinkedList.features) => ((AbstractSort in LinkedList.features) and (BubbleSort not in LinkedList.features) and (MergeSort not in LinkedList.features) and (InsertionSort not in LinkedList.features))
+  // If we choose BubbleSort, MergeSort, InsertionSort, or Quicksort, then we must have AbstractSort
+  (AbstractSort in LinkedList.features) <=> (one ((BubbleSort + MergeSort + InsertionSort + QuickSort) & LinkedList.features))
+  lone ((BubbleSort + MergeSort + InsertionSort + QuickSort) & LinkedList.features)
 
   // We choose Measurement iff we choose TCP_IP and SyntheticPerformanceOrMemorySize
   (Measurement in LinkedList.features) <=> (TCP_IP in LinkedList.features)
