@@ -1,5 +1,4 @@
 open util/integer
-pred show {}
 
 // Define the IMeasurable (attribute) signature
 abstract sig IMeasurable {
@@ -23,36 +22,42 @@ one sig HAVE_CRYPTO extends IMeasurable {}
   reliability = 0
 }
 
-abstract sig HAVE_INDEXES extends IMeasurable {}
+one sig HAVE_INDEXES extends IMeasurable {}
 {
+  footprint = 0
+  price = 0
+  reliability = 0
 }
 
-abstract sig HAVE_BTREE extends HAVE_INDEXES {}
+one sig HAVE_BTREE extends IMeasurable {}
 {
+  footprint = 0
+  price = 0
+  reliability = 0
 }
 
-one sig BTREE_FAST extends HAVE_BTREE {}
+one sig BTREE_FAST extends IMeasurable {}
 {
   footprint = 1800
   price = 0
   reliability = 0
 }
 
-one sig BTREE_SMALL extends HAVE_BTREE {}
+one sig BTREE_SMALL extends IMeasurable {}
 {
   footprint = 340
   price = 0
   reliability = 0
 }
 
-one sig HAVE_HASH extends HAVE_INDEXES {}
+one sig HAVE_HASH extends IMeasurable {}
 {
   footprint = 56
   price = 125
   reliability = 0
 }
 
-one sig HAVE_QUEUE extends HAVE_INDEXES {}
+one sig HAVE_QUEUE extends IMeasurable {}
 {
   footprint = 28
   price = 50
@@ -101,12 +106,16 @@ fact { all b : BerkeleyDbC | b.totalFootprint = (sum f : b.features | f.footprin
 fact { all b : BerkeleyDbC | b.totalPrice = (sum f : b.features | f.price ) }
 fact { all b : BerkeleyDbC | b.totalReliability = (sum f : b.features | f.reliability ) }
 
-// Define the predicates, what features Apache must have, and their relationships
+// Define the predicates, what features BerkeleyDbC must have, and their relationships
 pred featureSet
 {
   // All the other features exist in the universe, and may or may not be in the feature set
-  some (HAVE_INDEXES & BerkeleyDbC.features)
-  some (HAVE_BTREE & BerkeleyDbC.features)
+  // HAVE_INDEXES and HAVE_BTREE *must* be present
+  HAVE_INDEXES in BerkeleyDbC.features
+  HAVE_BTREE in BerkeleyDbC.features
+
+  // Must have exactly one of BTREE_FAST or BTREE_SMALL
+  (BTREE_FAST in BerkeleyDbC.features) or (BTREE_SMALL in BerkeleyDbC.features)
   (BTREE_FAST in BerkeleyDbC.features) => (BTREE_SMALL not in BerkeleyDbC.features)
   (BTREE_SMALL in BerkeleyDbC.features) => (BTREE_FAST not in BerkeleyDbC.features)
 
@@ -116,7 +125,7 @@ pred featureSet
 
 // Declare the Moolloy problem instance
 inst config {
-  10 Int,
+  12 Int,
   exactly 1 BerkeleyDbC
 }
 
