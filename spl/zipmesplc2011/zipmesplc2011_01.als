@@ -51,6 +51,11 @@ pred featureSet
   zipMecompress in ZipMeSPL.features
 
   // Define the constraints here:
+  zipMeCRC in ZipMeSPL.features
+  zipMearchiveCheck not in ZipMeSPL.features
+  zipMeadaptation in ZipMeSPL.features
+  zipMeadler32Chcksum not in ZipMeSPL.features
+  zipMeextract in ZipMeSPL.features
 }
 
 inst config {
