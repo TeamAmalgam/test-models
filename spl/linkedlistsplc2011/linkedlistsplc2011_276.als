@@ -103,6 +103,21 @@ pred featureSet
   // Define the constraints here:
   // If we choose Measurement, we must also choose AbstractSort
   (Measurement in LinkedList.features) => (AbstractSort in LinkedList.features)
+
+  // Define the configuration here:
+  ElementA not in LinkedList.features
+  ElementB not in LinkedList.features
+  ElementC in LinkedList.features
+  AbstractIterator in LinkedList.features
+  ForwardIterator in LinkedList.features
+  MergeSort not in LinkedList.features
+  QuickSort not in LinkedList.features
+  print not in LinkedList.features
+  Measurement in LinkedList.features
+  TCP_IP in LinkedList.features
+  SyntheticPerformanceOrMemorySize in LinkedList.features
+  Performance in LinkedList.features
+  Base in LinkedList.features
 }
 
 // Declare the Moolloy problem instance
