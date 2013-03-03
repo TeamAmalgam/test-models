@@ -464,6 +464,67 @@ pred featureSet
 
   // OmitFeatures is Mandatory
   OmitFeatures in Sqlite.features
+
+  // Define the partial configuration here:
+  OperatingSystemCharacteristics in Sqlite.features
+  SQLITE_SECURE_DELETE not in Sqlite.features
+  ChooseSQLITE_TEMP_STORE in Sqlite.features
+  SQLITE_TEMP_STORE_EQ_0 not in Sqlite.features
+  SQLITE_TEMP_STORE_EQ_1 not in Sqlite.features
+  SQLITE_TEMP_STORE_EQ_2 not in Sqlite.features
+  SQLITE_TEMP_STORE_EQ_3 in Sqlite.features
+  SQLITE_ENABLE_ATOMIC_WRITE in Sqlite.features
+  SQLITE_ENABLE_FTS3 not in Sqlite.features
+  SQLITE_ENABLE_FTS3_PARENTHESIS in Sqlite.features
+  ChooseMemSys not in Sqlite.features
+  SQLITE_ENABLE_MEMSYS3 not in Sqlite.features
+  SQLITE_ENABLE_RTREE in Sqlite.features
+  SQLITE_ENABLE_STAT2 not in Sqlite.features
+  SQLITE_ENABLE_UPDATE_DELETE_LIMIT in Sqlite.features
+  SQLITE_SOUNDEX not in Sqlite.features
+  YYTRACKMAXSTACKDEPTH in Sqlite.features
+  DisableFeatures in Sqlite.features
+  SQLITE_OMIT_ANALYZE in Sqlite.features
+  SQLITE_OMIT_AUTOINCREMENT in Sqlite.features
+  SQLITE_OMIT_AUTOINIT not in Sqlite.features
+  SQLITE_OMIT_AUTOVACUUM not in Sqlite.features
+  SQLITE_OMIT_BLOB_LITERAL not in Sqlite.features
+  SQLITE_OMIT_BTREECOUNT in Sqlite.features
+  SQLITE_OMIT_BUILTIN_TEST in Sqlite.features
+  SQLITE_OMIT_CHECK not in Sqlite.features
+  SQLITE_OMIT_COMPILEOPTION_DIAGS in Sqlite.features
+  SQLITE_OMIT_COMPLETE not in Sqlite.features
+  SQLITE_OMIT_COMPOUND_SELECT in Sqlite.features
+  SQLITE_OMIT_CONFLICT_CLAUSE in Sqlite.features
+  SQLITE_OMIT_DATETIME_FUNCS not in Sqlite.features
+  SQLITE_OMIT_DECLTYPE not in Sqlite.features
+  SQLITE_OMIT_DEPRECATED in Sqlite.features
+  SQLITE_OMIT_FLAG_PRAGMAS not in Sqlite.features
+  SQLITE_OMIT_FLOATING_POINT not in Sqlite.features
+  SQLITE_OMIT_FOREIGN_KEY not in Sqlite.features
+  SQLITE_OMIT_GET_TABLE in Sqlite.features
+  SQLITE_OMIT_INCRBLOB in Sqlite.features
+  SQLITE_OMIT_INTEGRITY_CHECK in Sqlite.features
+  SQLITE_OMIT_LIKE_OPTIMIZATION not in Sqlite.features
+  SQLITE_OMIT_LOAD_EXTENSION in Sqlite.features
+  SQLITE_OMIT_LOCALTIME in Sqlite.features
+  SQLITE_OMIT_MEMORYDB in Sqlite.features
+  SQLITE_OMIT_OR_OPTIMIZATION in Sqlite.features
+  SQLITE_OMIT_PRAGMA not in Sqlite.features
+  SQLITE_OMIT_PROGRESS_CALLBACK in Sqlite.features
+  SQLITE_OMIT_QUICKBALANCE in Sqlite.features
+  SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS in Sqlite.features
+  SQLITE_OMIT_SHARED_CACHE in Sqlite.features
+  SQLITE_OMIT_TCL_VARIABLE not in Sqlite.features
+  SQLITE_OMIT_TEMPDB not in Sqlite.features
+  SQLITE_OMIT_TRACE in Sqlite.features
+  SQLITE_OMIT_TRIGGER in Sqlite.features
+  SQLITE_OMIT_TRUNCATE_OPTIMIZATION in Sqlite.features
+  SQLITE_OMIT_VACUUM in Sqlite.features
+  SQLITE_OMIT_VIEW in Sqlite.features
+  SQLITE_OMIT_VIRTUALTABLE not in Sqlite.features
+  SQLITE_OMIT_WAL not in Sqlite.features
+  SQLITE_OMIT_XFER_OPT in Sqlite.features
 }
 
 inst config {
