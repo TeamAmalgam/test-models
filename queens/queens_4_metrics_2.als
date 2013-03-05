@@ -10,8 +10,8 @@ one sig position_0_0 extends Position {}
   col = 0
   diagonal1 = 1
   diagonal2 = 4
-  score1 = 0
-  score2 = 4
+  score1 = 3
+  score2 = 3
 }
 one sig position_0_1 extends Position {}
 {
@@ -19,8 +19,8 @@ one sig position_0_1 extends Position {}
   col = 1
   diagonal1 = 2
   diagonal2 = 3
-  score1 = 3
-  score2 = 4
+  score1 = 4
+  score2 = 2
 }
 one sig position_0_2 extends Position {}
 {
@@ -28,8 +28,8 @@ one sig position_0_2 extends Position {}
   col = 2
   diagonal1 = 3
   diagonal2 = 2
-  score1 = 3
-  score2 = 4
+  score1 = 0
+  score2 = 3
 }
 one sig position_0_3 extends Position {}
 {
@@ -38,7 +38,7 @@ one sig position_0_3 extends Position {}
   diagonal1 = 4
   diagonal2 = 1
   score1 = 2
-  score2 = 4
+  score2 = 3
 }
 one sig position_1_0 extends Position {}
 {
@@ -46,7 +46,7 @@ one sig position_1_0 extends Position {}
   col = 0
   diagonal1 = 2
   diagonal2 = 5
-  score1 = 4
+  score1 = 2
   score2 = 0
 }
 one sig position_1_1 extends Position {}
@@ -55,7 +55,7 @@ one sig position_1_1 extends Position {}
   col = 1
   diagonal1 = 3
   diagonal2 = 4
-  score1 = 4
+  score1 = 3
   score2 = 2
 }
 one sig position_1_2 extends Position {}
@@ -64,8 +64,8 @@ one sig position_1_2 extends Position {}
   col = 2
   diagonal1 = 4
   diagonal2 = 3
-  score1 = 0
-  score2 = 2
+  score1 = 4
+  score2 = 3
 }
 one sig position_1_3 extends Position {}
 {
@@ -73,8 +73,8 @@ one sig position_1_3 extends Position {}
   col = 3
   diagonal1 = 5
   diagonal2 = 2
-  score1 = 1
-  score2 = 1
+  score1 = 3
+  score2 = 4
 }
 one sig position_2_0 extends Position {}
 {
@@ -83,7 +83,7 @@ one sig position_2_0 extends Position {}
   diagonal1 = 3
   diagonal2 = 6
   score1 = 3
-  score2 = 1
+  score2 = 3
 }
 one sig position_2_1 extends Position {}
 {
@@ -91,8 +91,8 @@ one sig position_2_1 extends Position {}
   col = 1
   diagonal1 = 4
   diagonal2 = 5
-  score1 = 0
-  score2 = 4
+  score1 = 3
+  score2 = 0
 }
 one sig position_2_2 extends Position {}
 {
@@ -100,8 +100,8 @@ one sig position_2_2 extends Position {}
   col = 2
   diagonal1 = 5
   diagonal2 = 4
-  score1 = 3
-  score2 = 3
+  score1 = 0
+  score2 = 0
 }
 one sig position_2_3 extends Position {}
 {
@@ -109,8 +109,8 @@ one sig position_2_3 extends Position {}
   col = 3
   diagonal1 = 6
   diagonal2 = 3
-  score1 = 2
-  score2 = 3
+  score1 = 4
+  score2 = 0
 }
 one sig position_3_0 extends Position {}
 {
@@ -119,7 +119,7 @@ one sig position_3_0 extends Position {}
   diagonal1 = 4
   diagonal2 = 7
   score1 = 2
-  score2 = 0
+  score2 = 3
 }
 one sig position_3_1 extends Position {}
 {
@@ -127,8 +127,8 @@ one sig position_3_1 extends Position {}
   col = 1
   diagonal1 = 5
   diagonal2 = 6
-  score1 = 2
-  score2 = 3
+  score1 = 3
+  score2 = 1
 }
 one sig position_3_2 extends Position {}
 {
@@ -136,8 +136,8 @@ one sig position_3_2 extends Position {}
   col = 2
   diagonal1 = 6
   diagonal2 = 5
-  score1 = 3
-  score2 = 0
+  score1 = 0
+  score2 = 4
 }
 one sig position_3_3 extends Position {}
 {
@@ -145,7 +145,7 @@ one sig position_3_3 extends Position {}
   col = 3
   diagonal1 = 7
   diagonal2 = 4
-  score1 = 3
+  score1 = 0
   score2 = 4
 }
 
@@ -176,7 +176,7 @@ fact { all b : Board | b.score2 = (sum p : b.positions | p.score2) }
 
 // Declare the Moolloy problem instance
 inst queens {
-  6 Int,
+  5 Int,
   exactly 4 Queen
 }
 

@@ -83,11 +83,17 @@ eos
 end
 file.write("\n")
 
+# We assume the max total score is (max score value) * (number of pieces) = n * n
+# Since we're only adding that many scores
+# We also need to watch out for the case where m > n*n
+maxInteger = [n*n, m].max
+bit_width = (Math.log(maxInteger, 2)).ceil + 1
+
 file.write(
 <<-eos
 // Declare the Moolloy problem instance
 inst rooks {
-  5 Int,
+  #{bit_width} Int,
   exactly #{n} Rook
 }
 

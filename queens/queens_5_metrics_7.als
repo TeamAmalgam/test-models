@@ -11,12 +11,12 @@ one sig position_0_0 extends Position {}
   diagonal1 = 1
   diagonal2 = 5
   score1 = 1
-  score2 = 5
+  score2 = 4
   score3 = 0
-  score4 = 3
-  score5 = 0
-  score6 = 0
-  score7 = 1
+  score4 = 2
+  score5 = 4
+  score6 = 5
+  score7 = 0
 }
 one sig position_0_1 extends Position {}
 {
@@ -24,13 +24,13 @@ one sig position_0_1 extends Position {}
   col = 1
   diagonal1 = 2
   diagonal2 = 4
-  score1 = 5
+  score1 = 3
   score2 = 1
-  score3 = 1
+  score3 = 0
   score4 = 5
-  score5 = 4
+  score5 = 2
   score6 = 5
-  score7 = 0
+  score7 = 5
 }
 one sig position_0_2 extends Position {}
 {
@@ -38,13 +38,13 @@ one sig position_0_2 extends Position {}
   col = 2
   diagonal1 = 3
   diagonal2 = 3
-  score1 = 2
-  score2 = 2
-  score3 = 2
-  score4 = 1
-  score5 = 1
-  score6 = 0
-  score7 = 2
+  score1 = 0
+  score2 = 3
+  score3 = 3
+  score4 = 3
+  score5 = 0
+  score6 = 1
+  score7 = 5
 }
 one sig position_0_3 extends Position {}
 {
@@ -52,13 +52,13 @@ one sig position_0_3 extends Position {}
   col = 3
   diagonal1 = 4
   diagonal2 = 2
-  score1 = 1
-  score2 = 5
-  score3 = 2
-  score4 = 2
-  score5 = 4
-  score6 = 5
-  score7 = 1
+  score1 = 3
+  score2 = 2
+  score3 = 0
+  score4 = 4
+  score5 = 2
+  score6 = 0
+  score7 = 3
 }
 one sig position_0_4 extends Position {}
 {
@@ -66,12 +66,12 @@ one sig position_0_4 extends Position {}
   col = 4
   diagonal1 = 5
   diagonal2 = 1
-  score1 = 3
+  score1 = 0
   score2 = 4
-  score3 = 4
-  score4 = 0
-  score5 = 1
-  score6 = 3
+  score3 = 0
+  score4 = 5
+  score5 = 3
+  score6 = 0
   score7 = 0
 }
 one sig position_1_0 extends Position {}
@@ -80,13 +80,13 @@ one sig position_1_0 extends Position {}
   col = 0
   diagonal1 = 2
   diagonal2 = 6
-  score1 = 0
-  score2 = 4
-  score3 = 1
+  score1 = 3
+  score2 = 5
+  score3 = 0
   score4 = 4
-  score5 = 2
-  score6 = 0
-  score7 = 1
+  score5 = 4
+  score6 = 1
+  score7 = 4
 }
 one sig position_1_1 extends Position {}
 {
@@ -94,12 +94,12 @@ one sig position_1_1 extends Position {}
   col = 1
   diagonal1 = 3
   diagonal2 = 5
-  score1 = 1
-  score2 = 1
-  score3 = 5
-  score4 = 2
-  score5 = 1
-  score6 = 4
+  score1 = 0
+  score2 = 0
+  score3 = 1
+  score4 = 5
+  score5 = 5
+  score6 = 2
   score7 = 1
 }
 one sig position_1_2 extends Position {}
@@ -108,13 +108,13 @@ one sig position_1_2 extends Position {}
   col = 2
   diagonal1 = 4
   diagonal2 = 4
-  score1 = 2
-  score2 = 4
-  score3 = 2
-  score4 = 1
-  score5 = 2
-  score6 = 1
-  score7 = 2
+  score1 = 0
+  score2 = 2
+  score3 = 1
+  score4 = 5
+  score5 = 1
+  score6 = 4
+  score7 = 4
 }
 one sig position_1_3 extends Position {}
 {
@@ -123,12 +123,12 @@ one sig position_1_3 extends Position {}
   diagonal1 = 5
   diagonal2 = 3
   score1 = 2
-  score2 = 3
-  score3 = 2
-  score4 = 4
+  score2 = 0
+  score3 = 3
+  score4 = 0
   score5 = 2
-  score6 = 3
-  score7 = 2
+  score6 = 2
+  score7 = 5
 }
 one sig position_1_4 extends Position {}
 {
@@ -136,11 +136,11 @@ one sig position_1_4 extends Position {}
   col = 4
   diagonal1 = 6
   diagonal2 = 2
-  score1 = 5
-  score2 = 0
+  score1 = 4
+  score2 = 3
   score3 = 4
-  score4 = 3
-  score5 = 2
+  score4 = 2
+  score5 = 5
   score6 = 1
   score7 = 1
 }
@@ -150,11 +150,11 @@ one sig position_2_0 extends Position {}
   col = 0
   diagonal1 = 3
   diagonal2 = 7
-  score1 = 1
-  score2 = 0
+  score1 = 4
+  score2 = 2
   score3 = 4
-  score4 = 4
-  score5 = 1
+  score4 = 5
+  score5 = 5
   score6 = 0
   score7 = 0
 }
@@ -164,13 +164,13 @@ one sig position_2_1 extends Position {}
   col = 1
   diagonal1 = 4
   diagonal2 = 6
-  score1 = 0
+  score1 = 3
   score2 = 0
-  score3 = 5
-  score4 = 3
+  score3 = 3
+  score4 = 2
   score5 = 4
   score6 = 5
-  score7 = 5
+  score7 = 1
 }
 one sig position_2_2 extends Position {}
 {
@@ -178,12 +178,12 @@ one sig position_2_2 extends Position {}
   col = 2
   diagonal1 = 5
   diagonal2 = 5
-  score1 = 2
-  score2 = 3
-  score3 = 1
-  score4 = 2
+  score1 = 4
+  score2 = 1
+  score3 = 2
+  score4 = 0
   score5 = 2
-  score6 = 0
+  score6 = 3
   score7 = 2
 }
 one sig position_2_3 extends Position {}
@@ -192,13 +192,13 @@ one sig position_2_3 extends Position {}
   col = 3
   diagonal1 = 6
   diagonal2 = 4
-  score1 = 4
-  score2 = 1
+  score1 = 1
+  score2 = 2
   score3 = 2
-  score4 = 4
+  score4 = 2
   score5 = 0
   score6 = 4
-  score7 = 5
+  score7 = 3
 }
 one sig position_2_4 extends Position {}
 {
@@ -207,12 +207,12 @@ one sig position_2_4 extends Position {}
   diagonal1 = 7
   diagonal2 = 3
   score1 = 4
-  score2 = 4
-  score3 = 4
-  score4 = 4
-  score5 = 3
-  score6 = 0
-  score7 = 1
+  score2 = 1
+  score3 = 2
+  score4 = 1
+  score5 = 0
+  score6 = 5
+  score7 = 5
 }
 one sig position_3_0 extends Position {}
 {
@@ -220,13 +220,13 @@ one sig position_3_0 extends Position {}
   col = 0
   diagonal1 = 4
   diagonal2 = 8
-  score1 = 3
+  score1 = 4
   score2 = 5
-  score3 = 5
-  score4 = 0
-  score5 = 1
-  score6 = 3
-  score7 = 0
+  score3 = 1
+  score4 = 4
+  score5 = 2
+  score6 = 4
+  score7 = 1
 }
 one sig position_3_1 extends Position {}
 {
@@ -234,13 +234,13 @@ one sig position_3_1 extends Position {}
   col = 1
   diagonal1 = 5
   diagonal2 = 7
-  score1 = 0
-  score2 = 5
-  score3 = 1
+  score1 = 3
+  score2 = 3
+  score3 = 5
   score4 = 2
-  score5 = 1
-  score6 = 2
-  score7 = 4
+  score5 = 4
+  score6 = 0
+  score7 = 3
 }
 one sig position_3_2 extends Position {}
 {
@@ -248,12 +248,12 @@ one sig position_3_2 extends Position {}
   col = 2
   diagonal1 = 6
   diagonal2 = 6
-  score1 = 2
+  score1 = 5
   score2 = 4
-  score3 = 2
-  score4 = 1
-  score5 = 5
-  score6 = 1
+  score3 = 4
+  score4 = 0
+  score5 = 1
+  score6 = 5
   score7 = 4
 }
 one sig position_3_3 extends Position {}
@@ -262,13 +262,13 @@ one sig position_3_3 extends Position {}
   col = 3
   diagonal1 = 7
   diagonal2 = 5
-  score1 = 3
-  score2 = 0
-  score3 = 5
-  score4 = 3
+  score1 = 1
+  score2 = 1
+  score3 = 4
+  score4 = 5
   score5 = 4
-  score6 = 2
-  score7 = 4
+  score6 = 5
+  score7 = 3
 }
 one sig position_3_4 extends Position {}
 {
@@ -276,13 +276,13 @@ one sig position_3_4 extends Position {}
   col = 4
   diagonal1 = 8
   diagonal2 = 4
-  score1 = 0
-  score2 = 4
-  score3 = 3
-  score4 = 0
+  score1 = 2
+  score2 = 5
+  score3 = 1
+  score4 = 1
   score5 = 3
-  score6 = 0
-  score7 = 5
+  score6 = 3
+  score7 = 0
 }
 one sig position_4_0 extends Position {}
 {
@@ -290,13 +290,13 @@ one sig position_4_0 extends Position {}
   col = 0
   diagonal1 = 5
   diagonal2 = 9
-  score1 = 4
-  score2 = 2
-  score3 = 3
-  score4 = 2
-  score5 = 2
-  score6 = 3
-  score7 = 4
+  score1 = 0
+  score2 = 4
+  score3 = 0
+  score4 = 1
+  score5 = 5
+  score6 = 0
+  score7 = 3
 }
 one sig position_4_1 extends Position {}
 {
@@ -305,12 +305,12 @@ one sig position_4_1 extends Position {}
   diagonal1 = 6
   diagonal2 = 8
   score1 = 4
-  score2 = 5
+  score2 = 1
   score3 = 5
-  score4 = 5
-  score5 = 0
-  score6 = 3
-  score7 = 5
+  score4 = 1
+  score5 = 4
+  score6 = 0
+  score7 = 1
 }
 one sig position_4_2 extends Position {}
 {
@@ -318,13 +318,13 @@ one sig position_4_2 extends Position {}
   col = 2
   diagonal1 = 7
   diagonal2 = 7
-  score1 = 1
-  score2 = 1
-  score3 = 5
-  score4 = 2
-  score5 = 2
-  score6 = 1
-  score7 = 0
+  score1 = 4
+  score2 = 3
+  score3 = 0
+  score4 = 1
+  score5 = 1
+  score6 = 3
+  score7 = 2
 }
 one sig position_4_3 extends Position {}
 {
@@ -332,13 +332,13 @@ one sig position_4_3 extends Position {}
   col = 3
   diagonal1 = 8
   diagonal2 = 6
-  score1 = 3
-  score2 = 2
-  score3 = 5
-  score4 = 3
-  score5 = 4
+  score1 = 4
+  score2 = 3
+  score3 = 2
+  score4 = 0
+  score5 = 5
   score6 = 5
-  score7 = 4
+  score7 = 3
 }
 one sig position_4_4 extends Position {}
 {
@@ -346,13 +346,13 @@ one sig position_4_4 extends Position {}
   col = 4
   diagonal1 = 9
   diagonal2 = 5
-  score1 = 5
-  score2 = 1
-  score3 = 0
-  score4 = 5
-  score5 = 3
-  score6 = 1
-  score7 = 3
+  score1 = 2
+  score2 = 3
+  score3 = 4
+  score4 = 3
+  score5 = 0
+  score6 = 0
+  score7 = 5
 }
 
 // Define the Queen signature

@@ -8,59 +8,59 @@ one sig position_0_0 extends Position {}
 {
   row = 0
   col = 0
-  score1 = 1
-  score2 = 0
-  score3 = 3
-  score4 = 1
-  score5 = 0
+  score1 = 2
+  score2 = 1
+  score3 = 1
+  score4 = 0
+  score5 = 2
   score6 = 1
-  score7 = 3
+  score7 = 0
 }
 one sig position_0_1 extends Position {}
 {
   row = 0
   col = 1
-  score1 = 0
+  score1 = 3
   score2 = 0
-  score3 = 1
-  score4 = 3
-  score5 = 1
+  score3 = 2
+  score4 = 2
+  score5 = 3
   score6 = 1
-  score7 = 1
+  score7 = 0
 }
 one sig position_0_2 extends Position {}
 {
   row = 0
   col = 2
-  score1 = 3
-  score2 = 1
-  score3 = 1
+  score1 = 2
+  score2 = 0
+  score3 = 2
   score4 = 2
   score5 = 2
-  score6 = 1
-  score7 = 0
+  score6 = 3
+  score7 = 3
 }
 one sig position_1_0 extends Position {}
 {
   row = 1
   col = 0
-  score1 = 1
+  score1 = 3
   score2 = 3
   score3 = 0
-  score4 = 1
-  score5 = 2
+  score4 = 3
+  score5 = 1
   score6 = 3
-  score7 = 1
+  score7 = 3
 }
 one sig position_1_1 extends Position {}
 {
   row = 1
   col = 1
-  score1 = 2
-  score2 = 1
-  score3 = 2
+  score1 = 1
+  score2 = 3
+  score3 = 0
   score4 = 0
-  score5 = 3
+  score5 = 0
   score6 = 1
   score7 = 2
 }
@@ -68,49 +68,49 @@ one sig position_1_2 extends Position {}
 {
   row = 1
   col = 2
-  score1 = 0
-  score2 = 2
+  score1 = 2
+  score2 = 3
   score3 = 1
-  score4 = 1
-  score5 = 2
-  score6 = 1
+  score4 = 2
+  score5 = 1
+  score6 = 3
   score7 = 3
 }
 one sig position_2_0 extends Position {}
 {
   row = 2
   col = 0
-  score1 = 3
-  score2 = 2
+  score1 = 2
+  score2 = 1
   score3 = 3
-  score4 = 1
+  score4 = 2
   score5 = 1
-  score6 = 1
-  score7 = 1
+  score6 = 3
+  score7 = 0
 }
 one sig position_2_1 extends Position {}
 {
   row = 2
   col = 1
-  score1 = 1
+  score1 = 3
   score2 = 2
-  score3 = 3
-  score4 = 2
-  score5 = 2
-  score6 = 1
+  score3 = 1
+  score4 = 1
+  score5 = 3
+  score6 = 0
   score7 = 2
 }
 one sig position_2_2 extends Position {}
 {
   row = 2
   col = 2
-  score1 = 2
-  score2 = 1
+  score1 = 0
+  score2 = 0
   score3 = 1
-  score4 = 3
-  score5 = 3
-  score6 = 3
-  score7 = 0
+  score4 = 0
+  score5 = 2
+  score6 = 0
+  score7 = 2
 }
 
 // Define the Rook signature
