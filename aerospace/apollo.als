@@ -191,7 +191,6 @@ pred constraintSet
   // Must have cryogenic, storable, or NA in lmFuel
   one ((lmFuel_cryogenic + lmFuel_storable + lmFuel_NA) & Apollo.choices)
 
-  // Define the constraints
 
   // lmFuelConstraint
   // Choose lmFuel_NA iff lor_no is chosen
