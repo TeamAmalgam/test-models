@@ -5,9 +5,7 @@ open util/integer
 
 // Define the IMeasurable (attribute) signature
 // Risk = -1000 * ln(value)
-// IMLEO: Initial Mass in Low-Earth Orbit
 abstract sig IMeasurable {
-  IMLEO : one Int,
   risk : one Int
 }
 
@@ -18,134 +16,119 @@ abstract sig IMeasurable {
 // Command module crew
 one sig cmCrew_2 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 one sig cmCrew_3 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 // Lunar module crew
 one sig lmCrew_0 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 one sig lmCrew_1 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 105  // 0.9
 }
 
 one sig lmCrew_2 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 one sig lmCrew_3 extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 one sig moonDeparture_orbit extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 105  // 0.9
 }
 
 one sig moonDeparture_direct extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 105  // 0.9
 }
 
 one sig earthLaunch_orbit extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 10   // 0.99
 }
 
 one sig earthLaunch_direct extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 105  // 0.9
 }
 
 one sig moonArrival_orbit extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 10   // 0.99
 }
 
 one sig moonArrival_direct extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 51   // 0.95
 }
 
 // Earth Orbit Rendezvous
 one sig eor_yes extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 51   // 0.95
 }
 
 one sig eor_no extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 20   // 0.98
 }
 
 // Lunar Orbit Rendezvous
 one sig lor_yes extends IMeasurable {}
 {
-  IMLEO = 0   // TODO: apollo_functions.IMLEO
   risk = 51   // 0.95
 }
 
 one sig lor_no extends IMeasurable {}
 {
-  IMLEO = 0   // TODO: apollo_functions.IMLEO
   risk = 0    // 1
 }
 
 // Service Module fuel
 one sig smFuel_cryogenic extends IMeasurable {}
 {
-  IMLEO = 0
 }
 // Custom metric value for smFuel_cryogenic.risk
+// Note that risk values have been converted: Risk = -1000 * ln(value)
 fact { (lor_yes in Apollo.choices) => (smFuel_cryogenic.risk = 102) else (smFuel_cryogenic.risk = 205) }
-
+	/**
+	 * This function returns the risk if smFuel is cryogenic
+	 * 	if(LOR == yes) then mult = 2.0;
+	 * 	else mult = 4.0;
+	 * 	return math.pow(0.95, mult);
+	 */
 
 one sig smFuel_storable extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 // Lunar Module fuel
 one sig lmFuel_cryogenic extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 102  // 0.9025
 }
 
 one sig lmFuel_storable extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
 one sig lmFuel_NA extends IMeasurable {}
 {
-  IMLEO = 0
   risk = 0    // 1
 }
 
@@ -158,8 +141,77 @@ one sig Apollo
 }
 
 // Calculate the attributes
-fact { all a : Apollo | a.totalIMLEO = (sum c : a.choices | c.IMLEO) }
 fact { all a : Apollo | a.totalRisk = (sum c : a.choices | c.risk) }
+
+// IMLEO: Initial Mass in Low-Earth Orbit
+// Calculate totalIMLEO
+// We can do it here instead of summing attributes, since the val is 0 for everything else
+// These were precomputed in GenerateValsForIMLEO.java, see that file for the equations
+// Yes, we are literally enumerating out every single possible value for totalIMLEO
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 21}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 21}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 12}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 12}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 22}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 22}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 12}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 12}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 22}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 22}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 13}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 13}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 23}
+fact { (lor_no in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 23}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 15}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 15}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 29}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 29}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 16}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 16}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 17}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 17}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 17}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 17}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_no in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 30}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 4}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 4}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 4}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 4}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 7}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 8}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 8}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 8}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 9}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 9}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_2 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 13}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 5}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 5}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 6}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_0 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 6}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 8}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_1 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 9}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 11}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_2 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 13}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 10}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 13}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic in Apollo.choices) => Apollo.totalIMLEO = 12}
+fact { (lor_yes in Apollo.choices and cmCrew_3 in Apollo.choices and lmCrew_3 in Apollo.choices and smFuel_cryogenic not in Apollo.choices and smFuel_cryogenic not in Apollo.choices) => Apollo.totalIMLEO = 15}
 
 // Define the constraints
 pred constraintSet
