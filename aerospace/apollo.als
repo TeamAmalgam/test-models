@@ -1,8 +1,5 @@
 open util/integer
 
-// TODO: Two of the metric values are pretty complicated to express in Alloy
-// This model will run, but is still incomplete
-
 // Define the IMeasurable (attribute) signature
 // Risk = -1000 * ln(value)
 abstract sig IMeasurable {
