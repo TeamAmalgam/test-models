@@ -473,7 +473,7 @@ pred featureSet
   SQLITE_TEMP_STORE_EQ_2 in Sqlite.features
   SQLITE_ENABLE_ATOMIC_WRITE not in Sqlite.features
   SQLITE_ENABLE_MEMORY_MANAGEMENT not in Sqlite.features
-  ChooseMemSys not in Sqlite.features in Sqlite.features
+  ChooseMemSys not in Sqlite.features
   SQLITE_ENABLE_MEMSYS3 not in Sqlite.features
   SQLITE_ENABLE_MEMSYS5 not in Sqlite.features
   SQLITE_ENABLE_RTREE in Sqlite.features

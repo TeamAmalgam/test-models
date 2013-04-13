@@ -519,7 +519,7 @@ pred featureSet
   SQLITE_OMIT_TEMPDB not in Sqlite.features
   SQLITE_OMIT_TRACE in Sqlite.features
   SQLITE_OMIT_TRIGGER not in Sqlite.features
-  SQLITE_OMIT_TRUNCATE_OPTIMIZATION
+  SQLITE_OMIT_TRUNCATE_OPTIMIZATION in Sqlite.features
   SQLITE_OMIT_VIEW not in Sqlite.features
   SQLITE_OMIT_VIRTUALTABLE not in Sqlite.features
   SQLITE_DEBUG not in Sqlite.features

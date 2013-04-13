@@ -507,7 +507,7 @@ pred featureSet
   SQLITE_OMIT_SHARED_CACHE not in Sqlite.features
   SQLITE_OMIT_SUBQUERY not in Sqlite.features
   SQLITE_OMIT_TCL_VARIABLE not in Sqlite.features
-  SQLITE_OMIT_TRUNCATE_OPTIMIZATION
+  SQLITE_OMIT_TRUNCATE_OPTIMIZATION in Sqlite.features
   SQLITE_OMIT_UTF16 not in Sqlite.features
   SQLITE_OMIT_VACUUM in Sqlite.features
   SQLITE_OMIT_VIRTUALTABLE not in Sqlite.features

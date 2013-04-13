@@ -513,7 +513,7 @@ pred featureSet
   SQLITE_OMIT_QUICKBALANCE in Sqlite.features
   SQLITE_OMIT_REINDEX not in Sqlite.features
   SQLITE_OMIT_SCHEMA_PRAGMAS not in Sqlite.features
-  SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS
+  SQLITE_OMIT_SCHEMA_VERSION_PRAGMAS in Sqlite.features
   SQLITE_OMIT_SHARED_CACHE not in Sqlite.features
   SQLITE_OMIT_TCL_VARIABLE not in Sqlite.features
   SQLITE_OMIT_TRACE in Sqlite.features
