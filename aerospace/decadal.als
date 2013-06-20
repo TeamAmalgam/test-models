@@ -1501,14 +1501,14 @@ pred constraintSet
 
   // Fairness_Water constraints
   // The Water community gets value within every three-year rolling window
-  (Year2010.totalEco > 0) or (Year2011.totalEco > 0) or (Year2012.totalEco > 0)
-  (Year2011.totalEco > 0) or (Year2012.totalEco > 0) or (Year2013.totalEco > 0)
-  (Year2012.totalEco > 0) or (Year2013.totalEco > 0) or (Year2014.totalEco > 0)
-  (Year2013.totalEco > 0) or (Year2014.totalEco > 0) or (Year2015.totalEco > 0)
-  (Year2014.totalEco > 0) or (Year2015.totalEco > 0) or (Year2016.totalEco > 0)
-  (Year2015.totalEco > 0) or (Year2016.totalEco > 0) or (Year2017.totalEco > 0)
-  (Year2016.totalEco > 0) or (Year2017.totalEco > 0) or (Year2018.totalEco > 0)
-  (Year2017.totalEco > 0) or (Year2018.totalEco > 0) or (Year2019.totalEco > 0)
+  (Year2010.totalWater > 0) or (Year2011.totalWater > 0) or (Year2012.totalWater > 0)
+  (Year2011.totalWater > 0) or (Year2012.totalWater > 0) or (Year2013.totalWater > 0)
+  (Year2012.totalWater > 0) or (Year2013.totalWater > 0) or (Year2014.totalWater > 0)
+  (Year2013.totalWater > 0) or (Year2014.totalWater > 0) or (Year2015.totalWater > 0)
+  (Year2014.totalWater > 0) or (Year2015.totalWater > 0) or (Year2016.totalWater > 0)
+  (Year2015.totalWater > 0) or (Year2016.totalWater > 0) or (Year2017.totalWater > 0)
+  (Year2016.totalWater > 0) or (Year2017.totalWater > 0) or (Year2018.totalWater > 0)
+  (Year2017.totalWater > 0) or (Year2018.totalWater > 0) or (Year2019.totalWater > 0)
 
   // Fairness_Earth constraints
   // The Earth community gets value within every three-year rolling window
