@@ -2,374 +2,391 @@ open util/integer
 pred show {}
 
 // Define the Position signature
-abstract sig Position { row : one Int, col : one Int, score1 : one Int, score2 : one Int, score3 : one Int, score4 : one Int, score5 : one Int }
+abstract sig Position {
+  row : one Int,
+  col : one Int,
+  metric0 : one Int,
+  metric1 : one Int,
+  metric2 : one Int,
+  metric3 : one Int,
+  metric4 : one Int
+}
 
-one sig position_0_0 extends Position {}
-{
-  row = 0
-  col = 0
-  score1 = 5
-  score2 = 1
-  score3 = 1
-  score4 = 5
-  score5 = 4
-}
-one sig position_0_1 extends Position {}
-{
-  row = 0
-  col = 1
-  score1 = 2
-  score2 = 2
-  score3 = 3
-  score4 = 1
-  score5 = 1
-}
-one sig position_0_2 extends Position {}
-{
-  row = 0
-  col = 2
-  score1 = 1
-  score2 = 3
-  score3 = 6
-  score4 = 6
-  score5 = 4
-}
-one sig position_0_3 extends Position {}
-{
-  row = 0
-  col = 3
-  score1 = 5
-  score2 = 3
-  score3 = 6
-  score4 = 2
-  score5 = 6
-}
-one sig position_0_4 extends Position {}
-{
-  row = 0
-  col = 4
-  score1 = 5
-  score2 = 5
-  score3 = 0
-  score4 = 2
-  score5 = 5
-}
-one sig position_0_5 extends Position {}
-{
-  row = 0
-  col = 5
-  score1 = 6
-  score2 = 2
-  score3 = 0
-  score4 = 3
-  score5 = 6
-}
-one sig position_1_0 extends Position {}
-{
-  row = 1
-  col = 0
-  score1 = 6
-  score2 = 2
-  score3 = 4
-  score4 = 1
-  score5 = 1
-}
-one sig position_1_1 extends Position {}
-{
-  row = 1
-  col = 1
-  score1 = 3
-  score2 = 6
-  score3 = 5
-  score4 = 2
-  score5 = 4
-}
-one sig position_1_2 extends Position {}
-{
-  row = 1
-  col = 2
-  score1 = 6
-  score2 = 5
-  score3 = 2
-  score4 = 5
-  score5 = 6
-}
-one sig position_1_3 extends Position {}
-{
-  row = 1
-  col = 3
-  score1 = 4
-  score2 = 2
-  score3 = 0
-  score4 = 4
-  score5 = 5
-}
-one sig position_1_4 extends Position {}
-{
-  row = 1
-  col = 4
-  score1 = 2
-  score2 = 1
-  score3 = 4
-  score4 = 5
-  score5 = 4
-}
-one sig position_1_5 extends Position {}
-{
-  row = 1
-  col = 5
-  score1 = 0
-  score2 = 6
-  score3 = 1
-  score4 = 1
-  score5 = 2
-}
-one sig position_2_0 extends Position {}
-{
-  row = 2
-  col = 0
-  score1 = 6
-  score2 = 2
-  score3 = 2
-  score4 = 2
-  score5 = 0
-}
-one sig position_2_1 extends Position {}
-{
-  row = 2
-  col = 1
-  score1 = 4
-  score2 = 1
-  score3 = 6
-  score4 = 0
-  score5 = 1
-}
-one sig position_2_2 extends Position {}
-{
-  row = 2
-  col = 2
-  score1 = 1
-  score2 = 3
-  score3 = 4
-  score4 = 2
-  score5 = 3
-}
-one sig position_2_3 extends Position {}
-{
-  row = 2
-  col = 3
-  score1 = 4
-  score2 = 4
-  score3 = 2
-  score4 = 0
-  score5 = 6
-}
-one sig position_2_4 extends Position {}
-{
-  row = 2
-  col = 4
-  score1 = 2
-  score2 = 5
-  score3 = 6
-  score4 = 0
-  score5 = 1
-}
-one sig position_2_5 extends Position {}
-{
-  row = 2
-  col = 5
-  score1 = 1
-  score2 = 2
-  score3 = 2
-  score4 = 4
-  score5 = 1
-}
-one sig position_3_0 extends Position {}
-{
-  row = 3
-  col = 0
-  score1 = 3
-  score2 = 4
-  score3 = 1
-  score4 = 3
-  score5 = 4
-}
-one sig position_3_1 extends Position {}
-{
-  row = 3
-  col = 1
-  score1 = 0
-  score2 = 6
-  score3 = 2
-  score4 = 0
-  score5 = 1
-}
-one sig position_3_2 extends Position {}
+// Define concrete positions
+one sig position_0 extends Position {}
 {
   row = 3
   col = 2
-  score1 = 0
-  score2 = 6
-  score3 = 6
-  score4 = 1
-  score5 = 1
+  metric0 = 2
+  metric1 = 2
+  metric2 = 4
+  metric3 = 9
+  metric4 = 8
 }
-one sig position_3_3 extends Position {}
+one sig position_1 extends Position {}
 {
   row = 3
   col = 3
-  score1 = 6
-  score2 = 5
-  score3 = 6
-  score4 = 6
-  score5 = 2
+  metric0 = 2
+  metric1 = 2
+  metric2 = 8
+  metric3 = 2
+  metric4 = 6
 }
-one sig position_3_4 extends Position {}
+one sig position_2 extends Position {}
+{
+  row = 2
+  col = 3
+  metric0 = 0
+  metric1 = 0
+  metric2 = 4
+  metric3 = 2
+  metric4 = 3
+}
+one sig position_3 extends Position {}
+{
+  row = 2
+  col = 2
+  metric0 = 6
+  metric1 = 0
+  metric2 = 2
+  metric3 = 5
+  metric4 = 9
+}
+one sig position_4 extends Position {}
+{
+  row = 2
+  col = 1
+  metric0 = 3
+  metric1 = 1
+  metric2 = 9
+  metric3 = 2
+  metric4 = 3
+}
+one sig position_5 extends Position {}
 {
   row = 3
-  col = 4
-  score1 = 4
-  score2 = 4
-  score3 = 3
-  score4 = 5
-  score5 = 1
+  col = 1
+  metric0 = 9
+  metric1 = 7
+  metric2 = 3
+  metric3 = 3
+  metric4 = 1
 }
-one sig position_3_5 extends Position {}
-{
-  row = 3
-  col = 5
-  score1 = 6
-  score2 = 3
-  score3 = 0
-  score4 = 5
-  score5 = 4
-}
-one sig position_4_0 extends Position {}
-{
-  row = 4
-  col = 0
-  score1 = 2
-  score2 = 2
-  score3 = 3
-  score4 = 1
-  score5 = 2
-}
-one sig position_4_1 extends Position {}
+one sig position_6 extends Position {}
 {
   row = 4
   col = 1
-  score1 = 4
-  score2 = 6
-  score3 = 4
-  score4 = 0
-  score5 = 6
+  metric0 = 5
+  metric1 = 6
+  metric2 = 0
+  metric3 = 3
+  metric4 = 3
 }
-one sig position_4_2 extends Position {}
+one sig position_7 extends Position {}
 {
   row = 4
   col = 2
-  score1 = 6
-  score2 = 4
-  score3 = 4
-  score4 = 3
-  score5 = 6
+  metric0 = 6
+  metric1 = 8
+  metric2 = 5
+  metric3 = 2
+  metric4 = 8
 }
-one sig position_4_3 extends Position {}
+one sig position_8 extends Position {}
 {
   row = 4
   col = 3
-  score1 = 4
-  score2 = 4
-  score3 = 0
-  score4 = 4
-  score5 = 0
+  metric0 = 7
+  metric1 = 1
+  metric2 = 6
+  metric3 = 0
+  metric4 = 9
 }
-one sig position_4_4 extends Position {}
+one sig position_9 extends Position {}
 {
   row = 4
   col = 4
-  score1 = 1
-  score2 = 0
-  score3 = 2
-  score4 = 0
-  score5 = 2
+  metric0 = 8
+  metric1 = 8
+  metric2 = 8
+  metric3 = 8
+  metric4 = 8
 }
-one sig position_4_5 extends Position {}
+one sig position_10 extends Position {}
+{
+  row = 3
+  col = 4
+  metric0 = 9
+  metric1 = 7
+  metric2 = 9
+  metric3 = 1
+  metric4 = 8
+}
+one sig position_11 extends Position {}
+{
+  row = 2
+  col = 4
+  metric0 = 2
+  metric1 = 9
+  metric2 = 0
+  metric3 = 1
+  metric4 = 2
+}
+one sig position_12 extends Position {}
+{
+  row = 1
+  col = 4
+  metric0 = 2
+  metric1 = 7
+  metric2 = 5
+  metric3 = 7
+  metric4 = 9
+}
+one sig position_13 extends Position {}
+{
+  row = 1
+  col = 3
+  metric0 = 6
+  metric1 = 1
+  metric2 = 2
+  metric3 = 1
+  metric4 = 0
+}
+one sig position_14 extends Position {}
+{
+  row = 1
+  col = 2
+  metric0 = 6
+  metric1 = 4
+  metric2 = 3
+  metric3 = 0
+  metric4 = 5
+}
+one sig position_15 extends Position {}
+{
+  row = 1
+  col = 1
+  metric0 = 1
+  metric1 = 9
+  metric2 = 3
+  metric3 = 7
+  metric4 = 3
+}
+one sig position_16 extends Position {}
+{
+  row = 1
+  col = 0
+  metric0 = 5
+  metric1 = 3
+  metric2 = 3
+  metric3 = 8
+  metric4 = 9
+}
+one sig position_17 extends Position {}
+{
+  row = 2
+  col = 0
+  metric0 = 5
+  metric1 = 6
+  metric2 = 4
+  metric3 = 5
+  metric4 = 4
+}
+one sig position_18 extends Position {}
+{
+  row = 3
+  col = 0
+  metric0 = 8
+  metric1 = 4
+  metric2 = 5
+  metric3 = 9
+  metric4 = 8
+}
+one sig position_19 extends Position {}
 {
   row = 4
-  col = 5
-  score1 = 4
-  score2 = 4
-  score3 = 5
-  score4 = 0
-  score5 = 2
+  col = 0
+  metric0 = 2
+  metric1 = 4
+  metric2 = 1
+  metric3 = 5
+  metric4 = 5
 }
-one sig position_5_0 extends Position {}
+one sig position_20 extends Position {}
 {
   row = 5
   col = 0
-  score1 = 0
-  score2 = 4
-  score3 = 3
-  score4 = 5
-  score5 = 5
+  metric0 = 7
+  metric1 = 2
+  metric2 = 4
+  metric3 = 4
+  metric4 = 6
 }
-one sig position_5_1 extends Position {}
+one sig position_21 extends Position {}
 {
   row = 5
   col = 1
-  score1 = 0
-  score2 = 2
-  score3 = 0
-  score4 = 4
-  score5 = 2
+  metric0 = 5
+  metric1 = 7
+  metric2 = 4
+  metric3 = 9
+  metric4 = 4
 }
-one sig position_5_2 extends Position {}
+one sig position_22 extends Position {}
 {
   row = 5
   col = 2
-  score1 = 2
-  score2 = 0
-  score3 = 6
-  score4 = 6
-  score5 = 2
+  metric0 = 3
+  metric1 = 8
+  metric2 = 5
+  metric3 = 3
+  metric4 = 8
 }
-one sig position_5_3 extends Position {}
+one sig position_23 extends Position {}
 {
   row = 5
   col = 3
-  score1 = 5
-  score2 = 3
-  score3 = 0
-  score4 = 5
-  score5 = 2
+  metric0 = 6
+  metric1 = 4
+  metric2 = 9
+  metric3 = 9
+  metric4 = 9
 }
-one sig position_5_4 extends Position {}
+one sig position_24 extends Position {}
 {
   row = 5
   col = 4
-  score1 = 4
-  score2 = 6
-  score3 = 4
-  score4 = 0
-  score5 = 5
+  metric0 = 3
+  metric1 = 4
+  metric2 = 7
+  metric3 = 6
+  metric4 = 5
 }
-one sig position_5_5 extends Position {}
+one sig position_25 extends Position {}
 {
   row = 5
   col = 5
-  score1 = 0
-  score2 = 3
-  score3 = 1
-  score4 = 4
-  score5 = 0
+  metric0 = 3
+  metric1 = 7
+  metric2 = 7
+  metric3 = 1
+  metric4 = 2
+}
+one sig position_26 extends Position {}
+{
+  row = 4
+  col = 5
+  metric0 = 8
+  metric1 = 9
+  metric2 = 4
+  metric3 = 6
+  metric4 = 5
+}
+one sig position_27 extends Position {}
+{
+  row = 3
+  col = 5
+  metric0 = 8
+  metric1 = 0
+  metric2 = 8
+  metric3 = 2
+  metric4 = 8
+}
+one sig position_28 extends Position {}
+{
+  row = 2
+  col = 5
+  metric0 = 5
+  metric1 = 9
+  metric2 = 7
+  metric3 = 5
+  metric4 = 7
+}
+one sig position_29 extends Position {}
+{
+  row = 1
+  col = 5
+  metric0 = 5
+  metric1 = 8
+  metric2 = 0
+  metric3 = 5
+  metric4 = 4
+}
+one sig position_30 extends Position {}
+{
+  row = 0
+  col = 5
+  metric0 = 9
+  metric1 = 9
+  metric2 = 0
+  metric3 = 5
+  metric4 = 9
+}
+one sig position_31 extends Position {}
+{
+  row = 0
+  col = 4
+  metric0 = 9
+  metric1 = 3
+  metric2 = 4
+  metric3 = 4
+  metric4 = 6
+}
+one sig position_32 extends Position {}
+{
+  row = 0
+  col = 3
+  metric0 = 2
+  metric1 = 2
+  metric2 = 5
+  metric3 = 5
+  metric4 = 6
+}
+one sig position_33 extends Position {}
+{
+  row = 0
+  col = 2
+  metric0 = 1
+  metric1 = 3
+  metric2 = 0
+  metric3 = 0
+  metric4 = 6
+}
+one sig position_34 extends Position {}
+{
+  row = 0
+  col = 1
+  metric0 = 8
+  metric1 = 7
+  metric2 = 6
+  metric3 = 4
+  metric4 = 8
+}
+one sig position_35 extends Position {}
+{
+  row = 0
+  col = 0
+  metric0 = 4
+  metric1 = 2
+  metric2 = 1
+  metric3 = 4
+  metric4 = 6
 }
 
 // Define the Rook signature
 sig Rook { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board { pieces : set Rook, positions : set Position, score1 : one Int, score2 : one Int, score3 : one Int, score4 : one Int, score5 : one Int }
+abstract sig Board {
+  pieces : set Rook,
+  positions : set Position,
+  metric0 : one Int,
+  metric1 : one Int,
+  metric2 : one Int,
+  metric3 : one Int,
+  metric4 : one Int
+}
 
 // Set the pieces on the board
 fact { all b : Board, r : Rook | (r in b.pieces) <=> (r.board = b) }
@@ -385,25 +402,25 @@ fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.row = r2.posit
 fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.col = r2.position.col => r1 = r2) }
 
 // Compute the score
-fact { all b : Board | b.score1 = (sum p : b.positions | p.score1) }
-fact { all b : Board | b.score2 = (sum p : b.positions | p.score2) }
-fact { all b : Board | b.score3 = (sum p : b.positions | p.score3) }
-fact { all b : Board | b.score4 = (sum p : b.positions | p.score4) }
-fact { all b : Board | b.score5 = (sum p : b.positions | p.score5) }
+fact { all b : Board | b.metric0 = (sum p : b.positions | p.metric0) }
+fact { all b : Board | b.metric1 = (sum p : b.positions | p.metric1) }
+fact { all b : Board | b.metric2 = (sum p : b.positions | p.metric2) }
+fact { all b : Board | b.metric3 = (sum p : b.positions | p.metric3) }
+fact { all b : Board | b.metric4 = (sum p : b.positions | p.metric4) }
 
 // Declare the Moolloy problem instance
-inst rooks {
+inst RooksProblem {
   7 Int,
   exactly 6 Rook
 }
 
 // Set the objectives
 objectives o_global {
-  maximize ConcreteBoard.score1,
-  maximize ConcreteBoard.score2,
-  maximize ConcreteBoard.score3,
-  maximize ConcreteBoard.score4,
-  maximize ConcreteBoard.score5
+  maximize ConcreteBoard.metric0,
+  maximize ConcreteBoard.metric1,
+  maximize ConcreteBoard.metric2,
+  maximize ConcreteBoard.metric3,
+  maximize ConcreteBoard.metric4
 }
 
-run show for rooks optimize o_global
+run show for RooksProblem optimize o_global

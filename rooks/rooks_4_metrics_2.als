@@ -2,126 +2,137 @@ open util/integer
 pred show {}
 
 // Define the Position signature
-abstract sig Position { row : one Int, col : one Int, score1 : one Int, score2 : one Int }
+abstract sig Position {
+  row : one Int,
+  col : one Int,
+  metric0 : one Int,
+  metric1 : one Int
+}
 
-one sig position_0_0 extends Position {}
-{
-  row = 0
-  col = 0
-  score1 = 0
-  score2 = 4
-}
-one sig position_0_1 extends Position {}
-{
-  row = 0
-  col = 1
-  score1 = 3
-  score2 = 1
-}
-one sig position_0_2 extends Position {}
-{
-  row = 0
-  col = 2
-  score1 = 1
-  score2 = 0
-}
-one sig position_0_3 extends Position {}
-{
-  row = 0
-  col = 3
-  score1 = 0
-  score2 = 4
-}
-one sig position_1_0 extends Position {}
-{
-  row = 1
-  col = 0
-  score1 = 3
-  score2 = 3
-}
-one sig position_1_1 extends Position {}
-{
-  row = 1
-  col = 1
-  score1 = 2
-  score2 = 4
-}
-one sig position_1_2 extends Position {}
-{
-  row = 1
-  col = 2
-  score1 = 2
-  score2 = 0
-}
-one sig position_1_3 extends Position {}
-{
-  row = 1
-  col = 3
-  score1 = 2
-  score2 = 0
-}
-one sig position_2_0 extends Position {}
-{
-  row = 2
-  col = 0
-  score1 = 1
-  score2 = 2
-}
-one sig position_2_1 extends Position {}
+// Define concrete positions
+one sig position_0 extends Position {}
 {
   row = 2
   col = 1
-  score1 = 2
-  score2 = 2
+  metric0 = 2
+  metric1 = 2
 }
-one sig position_2_2 extends Position {}
+one sig position_1 extends Position {}
 {
   row = 2
   col = 2
-  score1 = 2
-  score2 = 3
+  metric0 = 2
+  metric1 = 2
 }
-one sig position_2_3 extends Position {}
+one sig position_2 extends Position {}
+{
+  row = 1
+  col = 2
+  metric0 = 0
+  metric1 = 0
+}
+one sig position_3 extends Position {}
+{
+  row = 1
+  col = 1
+  metric0 = 6
+  metric1 = 0
+}
+one sig position_4 extends Position {}
+{
+  row = 1
+  col = 0
+  metric0 = 3
+  metric1 = 1
+}
+one sig position_5 extends Position {}
 {
   row = 2
-  col = 3
-  score1 = 3
-  score2 = 3
+  col = 0
+  metric0 = 9
+  metric1 = 7
 }
-one sig position_3_0 extends Position {}
+one sig position_6 extends Position {}
 {
   row = 3
   col = 0
-  score1 = 2
-  score2 = 1
+  metric0 = 5
+  metric1 = 6
 }
-one sig position_3_1 extends Position {}
+one sig position_7 extends Position {}
 {
   row = 3
   col = 1
-  score1 = 0
-  score2 = 0
+  metric0 = 6
+  metric1 = 8
 }
-one sig position_3_2 extends Position {}
+one sig position_8 extends Position {}
 {
   row = 3
   col = 2
-  score1 = 3
-  score2 = 1
+  metric0 = 7
+  metric1 = 1
 }
-one sig position_3_3 extends Position {}
+one sig position_9 extends Position {}
 {
   row = 3
   col = 3
-  score1 = 2
-  score2 = 2
+  metric0 = 8
+  metric1 = 8
+}
+one sig position_10 extends Position {}
+{
+  row = 2
+  col = 3
+  metric0 = 9
+  metric1 = 7
+}
+one sig position_11 extends Position {}
+{
+  row = 1
+  col = 3
+  metric0 = 2
+  metric1 = 9
+}
+one sig position_12 extends Position {}
+{
+  row = 0
+  col = 3
+  metric0 = 2
+  metric1 = 7
+}
+one sig position_13 extends Position {}
+{
+  row = 0
+  col = 2
+  metric0 = 6
+  metric1 = 1
+}
+one sig position_14 extends Position {}
+{
+  row = 0
+  col = 1
+  metric0 = 6
+  metric1 = 4
+}
+one sig position_15 extends Position {}
+{
+  row = 0
+  col = 0
+  metric0 = 1
+  metric1 = 9
 }
 
 // Define the Rook signature
 sig Rook { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board { pieces : set Rook, positions : set Position, score1 : one Int, score2 : one Int }
+abstract sig Board {
+  pieces : set Rook,
+  positions : set Position,
+  metric0 : one Int,
+  metric1 : one Int
+}
 
 // Set the pieces on the board
 fact { all b : Board, r : Rook | (r in b.pieces) <=> (r.board = b) }
@@ -137,19 +148,19 @@ fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.row = r2.posit
 fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.col = r2.position.col => r1 = r2) }
 
 // Compute the score
-fact { all b : Board | b.score1 = (sum p : b.positions | p.score1) }
-fact { all b : Board | b.score2 = (sum p : b.positions | p.score2) }
+fact { all b : Board | b.metric0 = (sum p : b.positions | p.metric0) }
+fact { all b : Board | b.metric1 = (sum p : b.positions | p.metric1) }
 
 // Declare the Moolloy problem instance
-inst rooks {
-  5 Int,
+inst RooksProblem {
+  7 Int,
   exactly 4 Rook
 }
 
 // Set the objectives
 objectives o_global {
-  maximize ConcreteBoard.score1,
-  maximize ConcreteBoard.score2
+  maximize ConcreteBoard.metric0,
+  maximize ConcreteBoard.metric1
 }
 
-run show for rooks optimize o_global
+run show for RooksProblem optimize o_global
