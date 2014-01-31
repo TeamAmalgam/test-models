@@ -32,14 +32,14 @@ one sig Handle extends IMeasurable {}
 { performance = 4 }
 
 // Define Apache
-sig Apache
+one sig Apache
 {
   features : set IMeasurable,
   totalPerformance : one Int
 }
 
 // Sum up the performances
-fact { all a : Apache | a.totalPerformance = (sum f : a.features | f.performance ) }
+fact { Apache.totalPerformance = (sum f : Apache.features | f.performance ) }
 
 // Define the predicates: what features Apache must have, and their relationships
 pred featureSet
