@@ -658,7 +658,7 @@ one sig position_48 extends Position {}
 sig Queen { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board {
+one sig Board {
   pieces : set Queen,
   positions : set Position,
   metric0 : one Int,
@@ -668,29 +668,28 @@ abstract sig Board {
   metric4 : one Int,
   metric5 : one Int
 }
+{
+  Queen in pieces
+
+  // Queens can't attack each other
+  all q1 : pieces, q2 : pieces | (q1.position.row = q2.position.row => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.col = q2.position.col => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.diag1 = q2.position.diag1 => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.diag2 = q2.position.diag2 => q1 = q2)
+
+  // Compute the scores
+  metric0 = (sum p : positions | p.metric0)
+  metric1 = (sum p : positions | p.metric1)
+  metric2 = (sum p : positions | p.metric2)
+  metric3 = (sum p : positions | p.metric3)
+  metric4 = (sum p : positions | p.metric4)
+  metric5 = (sum p : positions | p.metric5)
+}
 
 // Set the pieces on the board
-fact { all b : Board, q : Queen | (q in b.pieces) <=> (q.board = b) }
-fact { all b : Board, p : Position | (p in b.positions) => (some q : b.pieces | q.position = p) }
-fact { all b : Board, q : Queen | (q.position in b.positions) }
-
-// Define a ConcreteBoard with pieces
-one sig ConcreteBoard extends Board {}
-fact { Queen in ConcreteBoard.pieces }
-
-// Add constraints so queens can't attack each other
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.row = q2.position.row => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.col = q2.position.col => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.diag1 = q2.position.diag1 => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.diag2 = q2.position.diag2 => q1 = q2) }
-
-// Compute the score
-fact { all b : Board | b.metric0 = (sum p : b.positions | p.metric0) }
-fact { all b : Board | b.metric1 = (sum p : b.positions | p.metric1) }
-fact { all b : Board | b.metric2 = (sum p : b.positions | p.metric2) }
-fact { all b : Board | b.metric3 = (sum p : b.positions | p.metric3) }
-fact { all b : Board | b.metric4 = (sum p : b.positions | p.metric4) }
-fact { all b : Board | b.metric5 = (sum p : b.positions | p.metric5) }
+fact { all q : Queen | (q.board = Board) }
+fact { all p : Position | (p in Board.positions) => (some q : Board.pieces | q.position = p) }
+fact { all q : Queen | (q.position in Board.positions) }
 
 // Declare the Moolloy problem instance
 inst QueensProblem {
@@ -700,12 +699,12 @@ inst QueensProblem {
 
 // Set the objectives
 objectives o_global {
-  maximize ConcreteBoard.metric0,
-  maximize ConcreteBoard.metric1,
-  maximize ConcreteBoard.metric2,
-  maximize ConcreteBoard.metric3,
-  maximize ConcreteBoard.metric4,
-  maximize ConcreteBoard.metric5
+  maximize Board.metric0,
+  maximize Board.metric1,
+  maximize Board.metric2,
+  maximize Board.metric3,
+  maximize Board.metric4,
+  maximize Board.metric5
 }
 
 run show for QueensProblem optimize o_global

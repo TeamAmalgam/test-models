@@ -107,33 +107,32 @@ one sig position_<%= index %> extends Position {}
 sig Queen { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board {
+one sig Board {
   pieces : set Queen,
   positions : set Position,
 <% metric_ids.each do |metric| %>
   <%= metric %> : one Int<%= "," unless metric_ids[-1] == metric %>
 <% end %>
 }
+{
+  Queen in pieces
+
+  // Queens can't attack each other
+  all q1 : pieces, q2 : pieces | (q1.position.row = q2.position.row => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.col = q2.position.col => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.diag1 = q2.position.diag1 => q1 = q2)
+  all q1 : pieces, q2 : pieces | (q1.position.diag2 = q2.position.diag2 => q1 = q2)
+
+  // Compute the scores
+<% metric_ids.each do |metric| %>
+  <%= metric %> = (sum p : positions | p.<%= metric %>)
+<% end %>
+}
 
 // Set the pieces on the board
-fact { all b : Board, q : Queen | (q in b.pieces) <=> (q.board = b) }
-fact { all b : Board, p : Position | (p in b.positions) => (some q : b.pieces | q.position = p) }
-fact { all b : Board, q : Queen | (q.position in b.positions) }
-
-// Define a ConcreteBoard with pieces
-one sig ConcreteBoard extends Board {}
-fact { Queen in ConcreteBoard.pieces }
-
-// Add constraints so queens can't attack each other
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.row = q2.position.row => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.col = q2.position.col => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.diag1 = q2.position.diag1 => q1 = q2) }
-fact { all b : Board, q1 : b.pieces, q2 : b.pieces | (q1.position.diag2 = q2.position.diag2 => q1 = q2) }
-
-// Compute the score
-<% metric_ids.each do |metric| %>
-fact { all b : Board | b.<%= metric %> = (sum p : b.positions | p.<%= metric %>) }
-<% end %>
+fact { all q : Queen | (q.board = Board) }
+fact { all p : Position | (p in Board.positions) => (some q : Board.pieces | q.position = p) }
+fact { all q : Queen | (q.position in Board.positions) }
 
 // Declare the Moolloy problem instance
 inst QueensProblem {
@@ -144,7 +143,7 @@ inst QueensProblem {
 // Set the objectives
 objectives o_global {
 <% metric_ids.each_with_index do |id, index| %>
-  maximize ConcreteBoard.<%= id %><%= "," unless metric_ids[-1] == id %>
+  maximize Board.<%= id %><%= "," unless metric_ids[-1] == id %>
 <% end %>
 }
 
