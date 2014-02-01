@@ -71,7 +71,7 @@ one sig LinkedList
 }
 
 // Sum up the metrics
-fact { all l : LinkedList | l.totalFootprint = (sum f : l.features | f.footprint ) }
+fact { LinkedList.totalFootprint = (sum f : LinkedList.features | f.footprint ) }
 
 // Define the predicates, what features LinkedList must have, and their relationships
 pred featureSet

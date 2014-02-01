@@ -47,7 +47,7 @@ one sig PKJab
 }
 
 // Sum the metrics
-fact { all p : PKJab | p.totalFootprint = (sum f : p.features | f.footprint) }
+fact { PKJab.totalFootprint = (sum f : PKJab.features | f.footprint) }
 
 // Define the predicates, what features LinkedList must have, and their relationships
 pred featureSet

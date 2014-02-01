@@ -433,7 +433,7 @@ one sig Sqlite
   totalFootprint : one Int
 }
 
-fact { all s : Sqlite | s.totalFootprint = (sum f : s.features | f.footprint ) }
+fact { Sqlite.totalFootprint = (sum f : Sqlite.features | f.footprint ) }
 
 pred featureSet
 {

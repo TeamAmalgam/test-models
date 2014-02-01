@@ -219,7 +219,7 @@ one sig UnformattedData extends Feature {}
 }
 
 // Define SearchAndRescueFM
-sig SearchAndRescueFM
+one sig SearchAndRescueFM
 {
   features : set Feature,
   total_cost : one Int,
@@ -227,8 +227,8 @@ sig SearchAndRescueFM
 }
 
 // Sum up the metrics
-fact { all s : SearchAndRescueFM | s.total_cost = (sum f : s.features | f.cost) }
-fact { all s : SearchAndRescueFM | s.total_RampUpTime = (sum f : s.features | f.RampUpTime) }
+fact { SearchAndRescueFM.total_cost = (sum f : SearchAndRescueFM.features | f.cost) }
+fact { SearchAndRescueFM.total_RampUpTime = (sum f : SearchAndRescueFM.features | f.RampUpTime) }
 
 // Define the predicates: what features must be included and their relationships
 pred featureSet

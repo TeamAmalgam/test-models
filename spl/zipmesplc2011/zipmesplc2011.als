@@ -32,14 +32,14 @@ one sig zipMeextract extends IMeasurable { }
 { footprint = 69 }
 
 // Define ZipMeSPL
-sig ZipMeSPL
+one sig ZipMeSPL
 {
   features : set IMeasurable,
   totalFootprint : one Int
 }
 
 // Sum up the performances
-fact { all z : ZipMeSPL | z.totalFootprint = (sum f : z.features | f.footprint ) }
+fact { ZipMeSPL.totalFootprint = (sum f : ZipMeSPL.features | f.footprint ) }
 
 // Define the predicates: what features ZipMeSPL must have, and their relationships
 pred featureSet

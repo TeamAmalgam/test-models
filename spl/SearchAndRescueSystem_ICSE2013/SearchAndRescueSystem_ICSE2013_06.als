@@ -363,7 +363,7 @@ one sig UnformattedData extends Feature {}
 }
 
 // Define SearchAndRescueFM
-sig SearchAndRescueFM
+one sig SearchAndRescueFM
 {
   features : set Feature,
   total_cost : one Int,
@@ -375,12 +375,12 @@ sig SearchAndRescueFM
 }
 
 // Sum up the metrics
-fact { all s : SearchAndRescueFM | s.total_cost = (sum f : s.features | f.cost) }
-fact { all s : SearchAndRescueFM | s.total_RampUpTime = (sum f : s.features | f.RampUpTime) }
-fact { all s : SearchAndRescueFM | s.total_DevelopmentTime = (sum f : s.features | f.DevelopmentTime) }
-fact { all s : SearchAndRescueFM | s.total_DeploymentTime = (sum f : s.features | f.DeploymentTime) }
-fact { all s : SearchAndRescueFM | s.total_BatteryUsage = (sum f : s.features | f.BatteryUsage) }
-fact { all s : SearchAndRescueFM | s.total_ResponseTime = (sum f : s.features | f.ResponseTime) }
+fact { SearchAndRescueFM.total_cost = (sum f : SearchAndRescueFM.features | f.cost) }
+fact { SearchAndRescueFM.total_RampUpTime = (sum f : SearchAndRescueFM.features | f.RampUpTime) }
+fact { SearchAndRescueFM.total_DevelopmentTime = (sum f : SearchAndRescueFM.features | f.DevelopmentTime) }
+fact { SearchAndRescueFM.total_DeploymentTime = (sum f : SearchAndRescueFM.features | f.DeploymentTime) }
+fact { SearchAndRescueFM.total_BatteryUsage = (sum f : SearchAndRescueFM.features | f.BatteryUsage) }
+fact { SearchAndRescueFM.total_ResponseTime = (sum f : SearchAndRescueFM.features | f.ResponseTime) }
 
 // Define the predicates: what features must be included and their relationships
 pred featureSet

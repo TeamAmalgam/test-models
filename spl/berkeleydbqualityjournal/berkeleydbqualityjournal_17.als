@@ -102,9 +102,9 @@ one sig BerkeleyDbC
 }
 
 // Sum up the metrics
-fact { all b : BerkeleyDbC | b.totalFootprint = (sum f : b.features | f.footprint ) }
-fact { all b : BerkeleyDbC | b.totalPrice = (sum f : b.features | f.price ) }
-fact { all b : BerkeleyDbC | b.totalReliability = (sum f : b.features | f.reliability ) }
+fact { BerkeleyDbC.totalFootprint = (sum f : BerkeleyDbC.features | f.footprint ) }
+fact { BerkeleyDbC.totalPrice = (sum f : BerkeleyDbC.features | f.price ) }
+fact { BerkeleyDbC.totalReliability = (sum f : BerkeleyDbC.features | f.reliability ) }
 
 // Define the predicates, what features BerkeleyDbC must have, and their relationships
 pred featureSet

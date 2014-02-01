@@ -32,14 +32,14 @@ one sig SYNTHETIC_BASE_FEATURE extends IMeasurable {}
 { footprint = 881 }
 
 // Define BerkeleyDbC
-sig BerkeleyDbC
+one sig BerkeleyDbC
 {
   features : set IMeasurable,
   totalFootprint : one Int
 }
 
 // Sum up the metrics
-fact { all b : BerkeleyDbC | b.totalFootprint = (sum f : b.features | f.footprint ) }
+fact { BerkeleyDbC.totalFootprint = (sum f : BerkeleyDbC.features | f.footprint ) }
 
 // Define the predicates: what features BerkeleyDbC must have, and their relationships
 pred featureSet

@@ -23,14 +23,14 @@ one sig Snapshot extends IMeasurable {}
 { footprint = 108 }
 
 // Define Prevayler
-sig Prevayler
+one sig Prevayler
 {
   features : set IMeasurable,
   totalFootprint : one Int
 }
 
 // Sum up the metrics
-fact { all p : Prevayler | p.totalFootprint = (sum f : p.features | f.footprint ) }
+fact { Prevayler.totalFootprint = (sum f : Prevayler.features | f.footprint ) }
 
 // Define the predicates: what features BerkeleyDbC must have, and their relationships
 pred featureSet
