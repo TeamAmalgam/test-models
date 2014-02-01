@@ -45,7 +45,7 @@ abstract sig Item {
 <% end %>
 }
 
-abstract sig Knapsack {
+one sig Knapsack {
   items : set Item,
   max_weight : one Int,
   current_weight : one Int,
@@ -53,17 +53,20 @@ abstract sig Knapsack {
   <%= metric %> : one Int<%= "," unless metric_ids[-1] == metric %>
 <% end %>
 }
+{
+  max_weight = <%= max_weight %>
 
-// Metric of the knapsack is sum of item metrics
+  // Metric of the knapsack is sum of item metrics
 <% metric_ids.each do |metric| %>
-fact { all k : Knapsack | k.<%= metric %> = (sum i : k.items | i.<%= metric%>) }
+  <%= metric %> = (sum i : items | i.<%= metric %>)
 <% end %>
 
-// Weight of knapsack is sum of item weights
-fact { all k : Knapsack | k.current_weight = (sum i : k.items | i.weight) }
+  // Weight of knapsack is sum of item weights
+  current_weight = (sum i : items | i.weight)
 
-// Weight of knapsack must be less than the max weight
-fact { all k : Knapsack | k.current_weight <= k.max_weight }
+  // Weight of knapsack must be less than the max weight
+  current_weight <= max_weight
+}
 
 // Define concrete items
 <% items.each_with_index do |item, index| %>
@@ -75,18 +78,13 @@ one sig Item<%= index %> extends Item {} {
 }
 <% end %>
 
-// Define concrete knapsack
-one sig ConcreteKnapsack extends Knapsack {} {
-  max_weight = <%= max_weight %>
-}
-
 inst KnapsackProblem {
   <%= bit_width %> Int
 }
 
 objectives o_global {
 <% metric_ids.each_with_index do |id, index| %>
-  maximize ConcreteKnapsack.<%= id %><%= "," unless metric_ids[-1] == id %>
+  maximize Knapsack.<%= id %><%= "," unless metric_ids[-1] == id %>
 <% end %>
 }
 

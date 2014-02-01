@@ -8,7 +8,7 @@ abstract sig Item {
   metric2 : one Int
 }
 
-abstract sig Knapsack {
+one sig Knapsack {
   items : set Item,
   max_weight : one Int,
   current_weight : one Int,
@@ -16,17 +16,20 @@ abstract sig Knapsack {
   metric1 : one Int,
   metric2 : one Int
 }
+{
+  max_weight = 100
 
-// Metric of the knapsack is sum of item metrics
-fact { all k : Knapsack | k.metric0 = (sum i : k.items | i.metric0) }
-fact { all k : Knapsack | k.metric1 = (sum i : k.items | i.metric1) }
-fact { all k : Knapsack | k.metric2 = (sum i : k.items | i.metric2) }
+  // Metric of the knapsack is sum of item metrics
+  metric0 = (sum i : items | i.metric0)
+  metric1 = (sum i : items | i.metric1)
+  metric2 = (sum i : items | i.metric2)
 
-// Weight of knapsack is sum of item weights
-fact { all k : Knapsack | k.current_weight = (sum i : k.items | i.weight) }
+  // Weight of knapsack is sum of item weights
+  current_weight = (sum i : items | i.weight)
 
-// Weight of knapsack must be less than the max weight
-fact { all k : Knapsack | k.current_weight <= k.max_weight }
+  // Weight of knapsack must be less than the max weight
+  current_weight <= max_weight
+}
 
 // Define concrete items
 one sig Item0 extends Item {} {
@@ -90,19 +93,14 @@ one sig Item9 extends Item {} {
   metric2 = 8
 }
 
-// Define concrete knapsack
-one sig ConcreteKnapsack extends Knapsack {} {
-  max_weight = 100
-}
-
 inst KnapsackProblem {
   8 Int
 }
 
 objectives o_global {
-  maximize ConcreteKnapsack.metric0,
-  maximize ConcreteKnapsack.metric1,
-  maximize ConcreteKnapsack.metric2
+  maximize Knapsack.metric0,
+  maximize Knapsack.metric1,
+  maximize Knapsack.metric2
 }
 
 run show for KnapsackProblem optimize o_global
