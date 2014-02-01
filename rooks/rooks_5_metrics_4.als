@@ -242,7 +242,7 @@ one sig position_24 extends Position {}
 sig Rook { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board {
+one sig Board {
   pieces : set Rook,
   positions : set Position,
   metric0 : one Int,
@@ -250,25 +250,24 @@ abstract sig Board {
   metric2 : one Int,
   metric3 : one Int
 }
+{
+  Rook in pieces
+
+  // Rooks can't attack each other
+  all r1 : pieces, r2 : pieces | (r1.position.row = r2.position.row => r1 = r2)
+  all r1 : pieces, r2 : pieces | (r1.position.col = r2.position.col => r1 = r2)
+
+  // Compute the scores
+  metric0 = (sum p : positions | p.metric0)
+  metric1 = (sum p : positions | p.metric1)
+  metric2 = (sum p : positions | p.metric2)
+  metric3 = (sum p : positions | p.metric3)
+}
 
 // Set the pieces on the board
-fact { all b : Board, r : Rook | (r in b.pieces) <=> (r.board = b) }
-fact { all b : Board, p : Position | (p in b.positions) => (some r : b.pieces | r.position = p) }
-fact { all b : Board, r : Rook | (r.position in b.positions) }
-
-// Define a ConcreteBoard with pieces
-one sig ConcreteBoard extends Board {}
-fact { Rook in ConcreteBoard.pieces }
-
-// Add constraints so rooks can't attack each other
-fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.row = r2.position.row => r1 = r2) }
-fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.col = r2.position.col => r1 = r2) }
-
-// Compute the score
-fact { all b : Board | b.metric0 = (sum p : b.positions | p.metric0) }
-fact { all b : Board | b.metric1 = (sum p : b.positions | p.metric1) }
-fact { all b : Board | b.metric2 = (sum p : b.positions | p.metric2) }
-fact { all b : Board | b.metric3 = (sum p : b.positions | p.metric3) }
+fact { all r : Rook | (r.board = Board) }
+fact { all p : Position | (p in Board.positions) => (some r : Board.pieces | r.position = p) }
+fact { all r : Rook | (r.position in Board.positions) }
 
 // Declare the Moolloy problem instance
 inst RooksProblem {
@@ -278,10 +277,10 @@ inst RooksProblem {
 
 // Set the objectives
 objectives o_global {
-  maximize ConcreteBoard.metric0,
-  maximize ConcreteBoard.metric1,
-  maximize ConcreteBoard.metric2,
-  maximize ConcreteBoard.metric3
+  maximize Board.metric0,
+  maximize Board.metric1,
+  maximize Board.metric2,
+  maximize Board.metric3
 }
 
 run show for RooksProblem optimize o_global

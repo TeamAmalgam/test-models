@@ -85,31 +85,30 @@ one sig position_<%= index %> extends Position {}
 sig Rook { board : one Board, position : one Position }
 
 // Define the Board signature
-abstract sig Board {
+one sig Board {
   pieces : set Rook,
   positions : set Position,
 <% metric_ids.each do |metric| %>
   <%= metric %> : one Int<%= "," unless metric_ids[-1] == metric %>
 <% end %>
 }
+{
+  Rook in pieces
+
+  // Rooks can't attack each other
+  all r1 : pieces, r2 : pieces | (r1.position.row = r2.position.row => r1 = r2)
+  all r1 : pieces, r2 : pieces | (r1.position.col = r2.position.col => r1 = r2)
+
+  // Compute the scores
+<% metric_ids.each do |metric| %>
+  <%= metric %> = (sum p : positions | p.<%= metric %>)
+<% end %>
+}
 
 // Set the pieces on the board
-fact { all b : Board, r : Rook | (r in b.pieces) <=> (r.board = b) }
-fact { all b : Board, p : Position | (p in b.positions) => (some r : b.pieces | r.position = p) }
-fact { all b : Board, r : Rook | (r.position in b.positions) }
-
-// Define a ConcreteBoard with pieces
-one sig ConcreteBoard extends Board {}
-fact { Rook in ConcreteBoard.pieces }
-
-// Add constraints so rooks can't attack each other
-fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.row = r2.position.row => r1 = r2) }
-fact { all b : Board, r1 : b.pieces, r2 : b.pieces | (r1.position.col = r2.position.col => r1 = r2) }
-
-// Compute the score
-<% metric_ids.each do |metric| %>
-fact { all b : Board | b.<%= metric %> = (sum p : b.positions | p.<%= metric %>) }
-<% end %>
+fact { all r : Rook | (r.board = Board) }
+fact { all p : Position | (p in Board.positions) => (some r : Board.pieces | r.position = p) }
+fact { all r : Rook | (r.position in Board.positions) }
 
 // Declare the Moolloy problem instance
 inst RooksProblem {
@@ -120,7 +119,7 @@ inst RooksProblem {
 // Set the objectives
 objectives o_global {
 <% metric_ids.each_with_index do |id, index| %>
-  maximize ConcreteBoard.<%= id %><%= "," unless metric_ids[-1] == id %>
+  maximize Board.<%= id %><%= "," unless metric_ids[-1] == id %>
 <% end %>
 }
 
