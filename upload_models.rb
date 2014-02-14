@@ -37,9 +37,11 @@ Dir.glob('*.als').each do |model|
 
   # Copy the model to model.als
   FileUtils.copy("#{filename}.als", "model.als")
+  `touch solutions_not_populated.txt`
   # Create a bzipped tarball containing just that model
-  `tar cjvf #{filename}.tar.bz2 model.als`
+  `tar cjvf #{filename}.tar.bz2 model.als solutions_not_populated.txt`
   FileUtils.rm("model.als")
+  FileUtils.rm("solutions_not_populated.txt")
 
   # Sometimes we try to upload and get a 404... is this a race condition?
   sleep(2)
