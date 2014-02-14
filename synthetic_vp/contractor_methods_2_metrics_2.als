@@ -68,7 +68,16 @@ one sig Problem {
 fact { all vu : ValueUnit | one cm : ContractorMethod | vu in cm.value_units }
 fact { value_units = ~(contractor_method) }
 
+inst config {
+  10 Int
+}
+
+objectives o_global {
+  maximize Problem.criterion_1_total,
+  maximize Problem.criterion_2_total
+}
+
 pred show {
 }
 
-run show for 10 int
+run show for config optimize o_global
