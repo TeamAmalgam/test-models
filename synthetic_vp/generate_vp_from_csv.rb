@@ -19,10 +19,6 @@ abstract sig Contractor {
 }
 
 abstract sig ContractorMethod {
-  <% criteria.each do |criterion| %>
-  criterion_<%= criterion %>_values : ValueUnit -> Int,
-  <% end %>
-
   value_units : set ValueUnit,
   contractor : one Contractor
 }
@@ -34,11 +30,7 @@ abstract sig ValueUnit {
 
   contractor_method : one ContractorMethod
 }
-{
-  <% criteria.each do |criterion| %>
-  criterion_<%= criterion %>_value = contractor_method.criterion_<%= criterion %>_values[this]
-  <% end %>
-}
+
 <% value_units.each do |value_unit| %>
 one sig ValueUnit_<%= value_unit %> extends ValueUnit {
 }
@@ -53,16 +45,6 @@ one sig Contractor_<%= contractor %>_Method_<%= method %> extends ContractorMeth
 }
 {
   contractor = Contractor_<%= contractor %>
-
-  <% criteria.each do |criterion| %>
-
-  criterion_<%= criterion %>_values =
-    <% value_units.each do |value_unit| %>
-    <% last = (value_units[-1] == (value_unit)) %>
-    ValueUnit_<%= value_unit %> -> <%= values[criterion][value_unit] %> <% unless last %> + <% end %>
-    <% end %>
-
-  <% end %>
 }
 
 <% end %>
@@ -85,6 +67,18 @@ fact { value_units = ~(contractor_method) }
 fact { methods = ~(contractor) }
 fact { all c : Contractor | (# c.contractor_value_units) <= <%= max_units_for_contractor %> }
 
+<% contractors.each do |contractor, methods| %>
+<% methods.each do |method, values| %>
+<% value_units.each do |value_unit| %>
+fact { (ValueUnit_<%= value_unit %> in Contractor_<%= contractor %>_Method_<%= method %>.value_units) => (
+<% criteria.each do |criterion| %>
+<% last = (criteria[-1] == criterion) %>
+        (ValueUnit_<%= value_unit %>.criterion_<%= criterion %>_value = <%= values[criterion][value_unit] %>) <% unless last %> && <% end %>
+<% end %>
+      )}
+<% end %>
+<% end %>
+<% end %>
 inst config {
   <%= bitwidth %> Int
 }
