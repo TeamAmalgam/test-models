@@ -66,10 +66,10 @@ one sig Contractor_<%= contractor %>_Method_<%= method %> extends ContractorMeth
 <% end %>
 
 one sig Problem {
-  <% criteria.each do |criterion| %>
-  <% last = (criteria[-1] == (criterion)) %>
-  criterion_<%= criterion %>_total : one Int <% unless last %>,<% end %>
-  <% end %>
+<% criteria.each do |criterion| %>
+<% last = (criteria[-1] == (criterion)) %>
+  criterion_<%= criterion %>_total : one Int<% unless last %>,<% end %>
+<% end %>
 }
 {
 <% criteria.each do |criterion| %>
@@ -97,10 +97,10 @@ inst config {
 }
 
 objectives o_global {
-  <% criteria.each do |criterion| %>
-  <% last = (criteria[-1] == (criterion)) %>
+<% criteria.each do |criterion| %>
+<% last = (criteria[-1] == (criterion)) %>
   maximize Problem.criterion_<%= criterion %>_total<% unless last %>,<% end %>
-  <% end %>
+<% end %>
 }
 
 pred show {
