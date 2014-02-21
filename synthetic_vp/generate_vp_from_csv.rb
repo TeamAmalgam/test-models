@@ -38,17 +38,19 @@ fun contractor [] : ContractorMethod -> Contractor {
 }
 
 abstract sig ValueUnit {
+<% criteria.each do |criterion| %>
+  criterion_<%= criterion %>_value : one Int,
+<% end %>
   contractor_method : one ContractorMethod
 }
 
-<% criteria.each do |criterion| %>
-fun criterion_<%= criterion %>_value [] : ValueUnit -> Int {
-  ValueUnit.(contractor_method.criterion_<%= criterion %>_values)
-}
-<% end %>
-
 <% value_units.each do |value_unit| %>
 one sig ValueUnit_<%= value_unit %> extends ValueUnit {
+}
+{
+<% criteria.each do |criterion| %>
+  criterion_<%= criterion %>_value = contractor_method.value_unit_<%= value_unit %>_criterion_<%= criterion %>_values
+<% end %>
 }
 <% end %>
 <% contractors.each do |contractor, methods| %>
@@ -70,24 +72,24 @@ one sig Problem {
   <% end %>
 }
 {
-  <% criteria.each do |criterion| %>
-  criterion_<%= criterion %>_total = (sum vu : ValueUnit | vu.criterion_<%= criterion %>_value)
-  <% end %>
+<% criteria.each do |criterion| %>
+  criterion_<%= criterion %>_total = ( sum vu : ValueUnit | vu.criterion_<%= criterion %>_value )
+<% end %>
 }
 
 fact { all c : Contractor | (# c.contractor_value_units) <= <%= max_units_for_contractor %> }
 
+<% value_units.each do |value_unit| %>
 <% criteria.each do |criterion| %>
-fun criterion_<%= criterion %>_values [] : ContractorMethod -> ValueUnit -> Int {
+fun value_unit_<%= value_unit %>_criterion_<%= criterion %>_values [] : ContractorMethod -> Int {
 <% contractors.each do |contractor, methods| %>
 <% methods.each do |method, values| %>
-<% value_units.each do |value_unit| %>
-<% last = ((contractor == contractors.keys.last) && (method == methods.keys.last) && (value_unit == value_units.last)) %>
-  Contractor_<%= contractor %>_Method_<%= method %> -> ValueUnit_<%= value_unit %> -> <%= values[criterion][value_unit] %> <% unless last %>+<% end %>
-<% end %>
+<% last = (contractor == contractors.keys.last && method == methods.keys.last) %>
+  Contractor_<%= contractor %>_Method_<%= method %> -> <%= values[criterion][value_unit] %> <% unless last %>+<% end %>
 <% end %>
 <% end %>
 }
+<% end %>
 <% end %>
 
 inst config {
