@@ -25,7 +25,7 @@ abstract sig ContractorMethod {
 
 abstract sig ValueUnit {
   <% criteria.each do |criterion| %>
-  criterion_<%= criterion %>_value : Int,
+  criterion_<%= criterion %>_value : one Int,
   <% end %>
 
   contractor_method : one ContractorMethod
@@ -53,7 +53,7 @@ one sig Contractor_<%= contractor %>_Method_<%= method %> extends ContractorMeth
 one sig Problem {
   <% criteria.each do |criterion| %>
   <% last = (criteria[-1] == (criterion)) %>
-  criterion_<%= criterion %>_total : Int <% unless last %>,<% end %>
+  criterion_<%= criterion %>_total : one Int <% unless last %>,<% end %>
   <% end %>
 }
 {
