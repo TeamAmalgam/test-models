@@ -431,7 +431,7 @@ pred featureSet
 // Declare the Moolloy problem instance
 inst config
 {
-  13 Int,
+  11 Int,
   exactly 1 SearchAndRescueFM
 }
 
