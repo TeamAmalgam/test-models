@@ -355,8 +355,7 @@ pred featureSet
 // Declare the Moolloy problem instance
 inst config
 {
-  11 Int,
-  exactly 1 SearchAndRescueFM
+  12 Int
 }
 
 // Set the objective(s)
