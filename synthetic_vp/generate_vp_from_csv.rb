@@ -26,6 +26,10 @@ fun contractor_value_units [] : Contractor -> ValueUnit {
   methods.value_units
 }
 
+fun value_unit_contractor [] : ValueUnit -> Contractor {
+  ~contractor_value_units
+}
+
 abstract sig ContractorMethod {
 }
 
@@ -169,5 +173,7 @@ end
 puts contractors.to_yaml
 puts criteria.inspect
 puts value_units.inspect
+
+puts ".als file written. Note: it may need to be adjusted (eg bitwidth, minimization vs maximization, additional constraints, etc)"
 
 write_problem(criteria, value_units, contractors)
